@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fade-in-only {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-out-dramatic {
+  from {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+:root {
+  --color-cream: 255 255 255;
+  --color-cocoa: 56 61 49;
+  --color-caramel: 166 145 101;
+  --color-beige: 224 216 199;
+  --color-sand: 236 232 221;
+  --color-ink: 31 34 28;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(166, 145, 101, 0.05), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(95, 107, 82, 0.05), transparent 24%),
+    linear-gradient(180deg, #ffffff 0%, rgb(var(--color-cream)) 48%, #ffffff 100%);
+  color: rgb(var(--color-ink));
+  font-feature-settings: "ss01" on, "cv01" on;
+}
+
+::selection {
+  background: rgba(166, 145, 101, 0.2);
+  color: rgb(var(--color-cocoa));
+}
+
+@layer base {
+  * {
+    @apply border-cocoa/10;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-sans tracking-tight text-cocoa;
+  }
+
+  a,
+  button {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-caramel/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent;
+  }
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-space {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .glass-panel {
+    @apply rounded-[2rem] border border-white/40 bg-white/70 backdrop-blur;
+  }
+
+  .editorial-surface {
+    @apply rounded-[2.4rem] border border-cocoa/10 backdrop-blur;
+    background-color: rgba(255, 255, 255, 0.52);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in-only {
+      opacity: 0;
+      animation: fade-in-only 0.8s ease forwards;
+      animation-delay: var(--fade-delay, 0ms);
+    }
+
+    .reveal-scroll {
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+
+    .reveal-scroll.is-visible {
+      opacity: 1;
+    }
+
+    .fade-in-out-dramatic {
+      opacity: 0;
+      animation: fade-in-out-dramatic 4.8s ease-in-out infinite;
+      animation-delay: var(--fade-delay, 0ms);
+    }
+
+    .fade-media {
+      transition: opacity 0.45s ease, transform 0.6s ease;
+    }
+
+    .group:hover .fade-media {
+      opacity: 0.94;
+      transform: translateY(-2px);
+    }
+  }
+}
